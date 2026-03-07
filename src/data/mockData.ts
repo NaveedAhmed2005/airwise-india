@@ -9,6 +9,39 @@ export const indianStates = [
   "Uttar Pradesh", "Uttarakhand", "West Bengal", "Delhi", "Chandigarh"
 ];
 
+export const stateDistricts: Record<string, string[]> = {
+  "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Tirupati", "Kakinada", "Rajahmundry", "Anantapur", "Eluru"],
+  "Arunachal Pradesh": ["Itanagar", "Tawang", "Ziro", "Pasighat", "Bomdila", "Along", "Tezu", "Naharlagun"],
+  "Assam": ["Guwahati", "Dibrugarh", "Silchar", "Jorhat", "Nagaon", "Tinsukia", "Tezpur", "Bongaigaon", "Karimganj"],
+  "Bihar": ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur", "Darbhanga", "Purnia", "Arrah", "Begusarai", "Munger", "Chapra"],
+  "Chhattisgarh": ["Raipur", "Bhilai", "Durg", "Bilaspur", "Korba", "Rajnandgaon", "Jagdalpur", "Ambikapur", "Raigarh"],
+  "Goa": ["Panaji", "Margao", "Vasco da Gama", "Mapusa", "Ponda", "Bicholim"],
+  "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Jamnagar", "Bhavnagar", "Gandhinagar", "Junagadh", "Anand", "Mundra"],
+  "Haryana": ["Gurugram", "Faridabad", "Panipat", "Ambala", "Karnal", "Hisar", "Rohtak", "Sonipat", "Yamunanagar", "Panchkula"],
+  "Himachal Pradesh": ["Shimla", "Manali", "Dharamshala", "Solan", "Mandi", "Kullu", "Bilaspur", "Hamirpur", "Una"],
+  "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Deoghar", "Hazaribagh", "Giridih", "Dumka"],
+  "Karnataka": ["Bengaluru Urban", "Bengaluru Rural", "Mysuru", "Hubli-Dharwad", "Mangalore", "Belgaum", "Bellary", "Gulbarga", "Davangere", "Shimoga", "Tumkur", "Udupi"],
+  "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Kollam", "Kannur", "Alappuzha", "Palakkad", "Malappuram", "Kottayam"],
+  "Madhya Pradesh": ["Bhopal", "Indore", "Gwalior", "Jabalpur", "Ujjain", "Sagar", "Rewa", "Satna", "Dewas", "Ratlam"],
+  "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Thane", "Nashik", "Aurangabad", "Solapur", "Kolhapur", "Amravati", "Nanded", "Sangli"],
+  "Manipur": ["Imphal", "Thoubal", "Bishnupur", "Churachandpur", "Ukhrul"],
+  "Meghalaya": ["Shillong", "Tura", "Jowai", "Nongstoin", "Williamnagar"],
+  "Mizoram": ["Aizawl", "Lunglei", "Champhai", "Serchhip", "Kolasib"],
+  "Nagaland": ["Kohima", "Dimapur", "Mokokchung", "Tuensang", "Wokha"],
+  "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Berhampur", "Sambalpur", "Puri", "Balasore", "Jharsuguda"],
+  "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda", "Mohali", "Pathankot", "Hoshiarpur", "Moga"],
+  "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Ajmer", "Bikaner", "Alwar", "Bhilwara", "Sikar", "Chittorgarh"],
+  "Sikkim": ["Gangtok", "Namchi", "Mangan", "Gyalshing"],
+  "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Salem", "Tirunelveli", "Erode", "Vellore", "Thoothukudi", "Krishnagiri", "Ranipet", "Dindigul"],
+  "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar", "Khammam", "Mancherial", "Mahbubnagar", "Nalgonda", "Adilabad"],
+  "Tripura": ["Agartala", "Udaipur", "Dharmanagar", "Kailashahar", "Ambassa"],
+  "Uttar Pradesh": ["Lucknow", "Kanpur", "Ghaziabad", "Agra", "Varanasi", "Meerut", "Allahabad", "Bareilly", "Aligarh", "Moradabad", "Noida", "Singrauli"],
+  "Uttarakhand": ["Dehradun", "Haridwar", "Rishikesh", "Haldwani", "Roorkee", "Kashipur", "Rudrapur", "Nainital"],
+  "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Asansol", "Siliguri", "Kharagpur", "Purba Bardhaman", "Malda", "Bardhaman"],
+  "Delhi": ["Central Delhi", "South Delhi", "North Delhi", "East Delhi", "West Delhi", "New Delhi", "Shahdara", "Dwarka"],
+  "Chandigarh": ["Chandigarh"],
+};
+
 export const vehicleTypes = ["Car", "Bus", "Lorry", "Bike", "Auto", "Truck"] as const;
 
 export const tollGates: TollGate[] = [
@@ -24,9 +57,16 @@ export const tollGates: TollGate[] = [
   { id: "TG010", name: "Palsit Toll Plaza", state: "West Bengal", district: "Purba Bardhaman", lat: 23.43, lng: 87.93 },
   { id: "TG011", name: "Shahjahanpur Toll", state: "Rajasthan", district: "Alwar", lat: 27.87, lng: 76.39 },
   { id: "TG012", name: "Vadodara Toll Plaza", state: "Gujarat", district: "Vadodara", lat: 22.31, lng: 73.19 },
+  { id: "TG013", name: "Maduravoyal Toll", state: "Tamil Nadu", district: "Chennai", lat: 13.06, lng: 80.17 },
+  { id: "TG014", name: "Tumkur Toll Plaza", state: "Karnataka", district: "Tumkur", lat: 13.34, lng: 77.10 },
+  { id: "TG015", name: "Devanahalli Toll", state: "Karnataka", district: "Bengaluru Rural", lat: 13.25, lng: 77.71 },
+  { id: "TG016", name: "Badarpur Toll", state: "Delhi", district: "South Delhi", lat: 28.51, lng: 77.30 },
+  { id: "TG017", name: "Agra Toll Plaza", state: "Uttar Pradesh", district: "Agra", lat: 27.18, lng: 78.02 },
+  { id: "TG018", name: "Jaipur Toll Plaza", state: "Rajasthan", district: "Jaipur", lat: 26.92, lng: 75.79 },
+  { id: "TG019", name: "Pune-Mumbai Expressway Toll", state: "Maharashtra", district: "Pune", lat: 18.77, lng: 73.39 },
+  { id: "TG020", name: "Ahmedabad Toll", state: "Gujarat", district: "Ahmedabad", lat: 23.02, lng: 72.57 },
 ];
 
-const riskLevels = ["high", "moderate", "low"] as const;
 const directions = ["entering", "exiting"] as const;
 
 function randomFrom<T>(arr: readonly T[]): T {
