@@ -3,16 +3,18 @@ import type { User, UserRole } from "@/types/monitor";
 
 interface PendingCollector extends User {
   password: string;
+  photo?: string;
+  idProof?: string;
 }
 
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string, role: UserRole) => boolean;
   logout: () => void;
-  pendingCollectors: User[];
+  pendingCollectors: (User & { photo?: string; idProof?: string })[];
   approveCollector: (id: string) => void;
   rejectCollector: (id: string) => void;
-  requestCollectorSignup: (name: string, email: string, password: string) => void;
+  requestCollectorSignup: (name: string, email: string, password: string, photo?: string, idProof?: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -51,7 +53,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const collector = pendingCollectors.find((c) => c.id === id);
     if (collector) {
       setPendingCollectors((prev) => prev.filter((c) => c.id !== id));
-      // Use the password they signed up with
       setApprovedCollectors((prev) => [...prev, { email: collector.email, password: collector.password, name: collector.name }]);
     }
   };
@@ -60,12 +61,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setPendingCollectors((prev) => prev.filter((c) => c.id !== id));
   };
 
-  const requestCollectorSignup = (name: string, email: string, password: string) => {
-    setPendingCollectors((prev) => [...prev, { id: `PC${Date.now()}`, name, email, role: "collector" as const, approved: false, password }]);
+  const requestCollectorSignup = (name: string, email: string, password: string, photo?: string, idProof?: string) => {
+    setPendingCollectors((prev) => [...prev, { id: `PC${Date.now()}`, name, email, role: "collector" as const, approved: false, password, photo, idProof }]);
   };
 
-  // Expose only User fields (without password) to the pending list shown in UI
-  const safePendingCollectors: User[] = pendingCollectors.map(({ password, ...rest }) => rest);
+  // Expose photo & idProof (without password) to the pending list shown in UI
+  const safePendingCollectors = pendingCollectors.map(({ password, ...rest }) => rest);
 
   return (
     <AuthContext.Provider value={{ user, login, logout, pendingCollectors: safePendingCollectors, approveCollector, rejectCollector, requestCollectorSignup }}>

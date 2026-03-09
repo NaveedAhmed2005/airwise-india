@@ -4,9 +4,10 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Shield, UserCheck, UserX, Users, CheckCircle } from "lucide-react";
+import { Shield, UserCheck, UserX, Users, CheckCircle, Camera, FileText, Eye } from "lucide-react";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export default function AdminDashboard() {
   const { user, pendingCollectors, approveCollector, rejectCollector } = useAuth();
@@ -70,17 +71,81 @@ export default function AdminDashboard() {
           ) : (
             <div className="divide-y divide-border">
               {pendingCollectors.map((c) => (
-                <div key={c.id} className="flex items-center justify-between px-5 py-4">
+                <div key={c.id} className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">
-                      <UserCheck className="h-5 w-5 text-muted-foreground" />
-                    </div>
+                    {/* Show photo if available */}
+                    {(c as any).photo ? (
+                      <img
+                        src={(c as any).photo}
+                        alt={c.name}
+                        className="h-12 w-12 rounded-full object-cover border-2 border-primary"
+                        style={{ transform: "scaleX(-1)" }}
+                      />
+                    ) : (
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
+                        <UserCheck className="h-5 w-5 text-muted-foreground" />
+                      </div>
+                    )}
                     <div>
                       <p className="text-sm font-semibold text-foreground">{c.name}</p>
                       <p className="text-xs text-muted-foreground">{c.email}</p>
+                      <div className="mt-1 flex items-center gap-2">
+                        {(c as any).photo && (
+                          <Badge variant="outline" className="text-xs gap-1">
+                            <Camera className="h-3 w-3" /> Photo
+                          </Badge>
+                        )}
+                        {(c as any).idProof && (
+                          <Badge variant="outline" className="text-xs gap-1">
+                            <FileText className="h-3 w-3" /> ID Proof
+                          </Badge>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 flex-wrap">
+                    {/* View Documents Dialog */}
+                    {((c as any).photo || (c as any).idProof) && (
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline" size="sm" className="gap-1">
+                            <Eye className="h-4 w-4" /> View Documents
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-lg">
+                          <DialogHeader>
+                            <DialogTitle>Documents — {c.name}</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4">
+                            {(c as any).photo && (
+                              <div>
+                                <p className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
+                                  <Camera className="h-4 w-4 text-primary" /> Live Photo
+                                </p>
+                                <img
+                                  src={(c as any).photo}
+                                  alt="Live Photo"
+                                  className="w-full max-h-64 object-contain rounded-xl border border-border"
+                                  style={{ transform: "scaleX(-1)" }}
+                                />
+                              </div>
+                            )}
+                            {(c as any).idProof && (
+                              <div>
+                                <p className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
+                                  <FileText className="h-4 w-4 text-primary" /> IAS ID Proof
+                                </p>
+                                <img
+                                  src={(c as any).idProof}
+                                  alt="ID Proof"
+                                  className="w-full max-h-64 object-contain rounded-xl border border-border bg-muted"
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    )}
                     <Button size="sm" onClick={() => { approveCollector(c.id); toast.success(`${c.name} approved`); }}>
                       <CheckCircle className="mr-1 h-4 w-4" /> Approve
                     </Button>
