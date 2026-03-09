@@ -15,6 +15,7 @@ export default function Navbar() {
     { to: "/toll-gates", label: "Toll Gates" },
     { to: "/carbon-credits", label: "Carbon Credits" },
     { to: "/aqi-map", label: "AQI Map" },
+    { to: "/aqi-prediction", label: "AQI Prediction" },
   ];
 
   const isActive = (path: string) => location.pathname === path;

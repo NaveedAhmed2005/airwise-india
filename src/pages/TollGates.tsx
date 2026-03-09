@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Truck, ArrowDownLeft, ArrowUpRight, Search, AlertTriangle, Clock, Activity, Zap } from "lucide-react";
 import { generateVehicleEntries, indianStates, tollGates, stateDistricts } from "@/data/mockData";
+import LiveVehicleFeed from "@/components/LiveVehicleFeed";
 
 const vehicleEntries = generateVehicleEntries(100);
 
@@ -147,6 +148,11 @@ export default function TollGates() {
             </Select>
           </div>
         </Card>
+
+        {/* Live Feed + Table */}
+        <div className="mb-6">
+          <LiveVehicleFeed />
+        </div>
 
         {/* Table */}
         <Card className="shadow-card overflow-hidden">
