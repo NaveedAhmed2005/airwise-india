@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import TollGates from "./pages/TollGates";
 import CarbonCredits from "./pages/CarbonCredits";
 import AQIMap from "./pages/AQIMap";
+import AQIPrediction from "./pages/AQIPrediction";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
