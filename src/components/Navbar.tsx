@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Wind, LogIn, LogOut, Shield, UserCheck, Menu, X } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -15,7 +16,11 @@ export default function Navbar() {
     { to: "/toll-gates", label: "Toll Gates" },
     { to: "/carbon-credits", label: "Carbon Credits" },
     { to: "/aqi-map", label: "AQI Map" },
-    { to: "/aqi-prediction", label: "AQI Prediction" },
+    { to: "/aqi-prediction", label: "Prediction" },
+    { to: "/analytics", label: "Analytics" },
+    { to: "/suggestions", label: "Precautions" },
+    { to: "/policies", label: "Policies" },
+    { to: "/about", label: "About" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -33,12 +38,12 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-0.5 lg:flex">
           {links.map((link) => (
             <Link
               key={link.to}
               to={link.to}
-              className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+              className={`rounded-lg px-2.5 py-2 text-sm font-medium transition-colors ${
                 isActive(link.to)
                   ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -49,14 +54,14 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           {user ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <div className="hidden items-center gap-2 rounded-full bg-accent px-3 py-1.5 sm:flex">
                 {user.role === "admin" ? <Shield className="h-3.5 w-3.5 text-accent-foreground" /> : <UserCheck className="h-3.5 w-3.5 text-accent-foreground" />}
                 <span className="text-xs font-semibold text-accent-foreground uppercase">{user.role}</span>
               </div>
-              <span className="hidden text-sm font-medium text-foreground lg:block">{user.name}</span>
               <Button variant="outline" size="sm" onClick={() => { logout(); navigate("/dashboard"); }}>
                 <LogOut className="mr-1 h-4 w-4" /> Logout
               </Button>
@@ -67,16 +72,14 @@ export default function Navbar() {
             </Button>
           )}
 
-          {/* Mobile menu toggle */}
-          <button className="md:hidden rounded-lg p-2 text-muted-foreground hover:bg-muted" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button className="lg:hidden rounded-lg p-2 text-muted-foreground hover:bg-muted" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-border bg-card p-4 md:hidden animate-fade-in">
+        <div className="border-t border-border bg-card p-4 lg:hidden animate-fade-in">
           <div className="flex flex-col gap-1">
             {links.map((link) => (
               <Link
