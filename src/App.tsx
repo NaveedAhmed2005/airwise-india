@@ -10,6 +10,10 @@ import TollGates from "./pages/TollGates";
 import CarbonCredits from "./pages/CarbonCredits";
 import AQIMap from "./pages/AQIMap";
 import AQIPrediction from "./pages/AQIPrediction";
+import Analytics from "./pages/Analytics";
+import Suggestions from "./pages/Suggestions";
+import Policies from "./pages/Policies";
+import About from "./pages/About";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
@@ -30,6 +34,10 @@ const App = () => (
             <Route path="/carbon-credits" element={<CarbonCredits />} />
             <Route path="/aqi-map" element={<AQIMap />} />
             <Route path="/aqi-prediction" element={<AQIPrediction />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/suggestions" element={<Suggestions />} />
+            <Route path="/policies" element={<Policies />} />
+            <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
