@@ -12,6 +12,7 @@ interface AuthContextType {
   login: (email: string, password: string, role: UserRole) => boolean;
   logout: () => void;
   pendingCollectors: (User & { photo?: string; idProof?: string })[];
+  approvedCollectorsList: { name: string; email: string; role: "admin" | "collector" }[];
   approveCollector: (id: string) => void;
   rejectCollector: (id: string) => void;
   requestCollectorSignup: (name: string, email: string, password: string, photo?: string, idProof?: string) => void;
