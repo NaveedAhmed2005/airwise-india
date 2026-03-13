@@ -100,11 +100,6 @@ type Tab = "chat" | "schemes" | "members";
 
 export default function CollectorHub() {
   const { user } = useAuth();
-
-  if (!user || (user.role !== "collector" && user.role !== "admin")) {
-    return <Navigate to="/login" replace />;
-  }
-
   const [activeTab, setActiveTab] = useState<Tab>("chat");
   const [messages, setMessages] = useState<ChatMessage[]>(SEED_MESSAGES);
   const [schemes, setSchemes] = useState<Scheme[]>(SEED_SCHEMES);
@@ -114,13 +109,15 @@ export default function CollectorHub() {
   const [voteDialog, setVoteDialog] = useState<string | null>(null);
   const [voteFeedback, setVoteFeedback] = useState("");
   const chatEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
-
-  // ── new scheme form ──
   const [newScheme, setNewScheme] = useState({
     title: "", brief: "", dprFileName: "", implementationPlan: "", budgetEstimation: "",
   });
+
+  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+
+  if (!user || (user.role !== "collector" && user.role !== "admin")) {
+    return <Navigate to="/login" replace />;
+  }
 
   const sendMessage = () => {
     if (!chatInput.trim()) return;
