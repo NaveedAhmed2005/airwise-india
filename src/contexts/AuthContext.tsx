@@ -69,8 +69,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Expose photo & idProof (without password) to the pending list shown in UI
   const safePendingCollectors = pendingCollectors.map(({ password, ...rest }) => rest);
 
+  // Build full members list: admin + approved collectors
+  const approvedCollectorsList: { name: string; email: string; role: "admin" | "collector" }[] = [
+    { name: "System Admin", email: ADMIN_CREDENTIALS.email, role: "admin" },
+    ...approvedCollectors.map((c) => ({ name: c.name, email: c.email, role: "collector" as const })),
+  ];
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, pendingCollectors: safePendingCollectors, approveCollector, rejectCollector, requestCollectorSignup }}>
+    <AuthContext.Provider value={{ user, login, logout, pendingCollectors: safePendingCollectors, approvedCollectorsList, approveCollector, rejectCollector, requestCollectorSignup }}>
       {children}
     </AuthContext.Provider>
   );
