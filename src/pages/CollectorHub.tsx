@@ -368,7 +368,7 @@ export default function CollectorHub() {
                               {v.vote === "approve" ? <ThumbsUp className="h-3.5 w-3.5" /> : <ThumbsDown className="h-3.5 w-3.5" />}
                             </div>
                             <div className="flex-1">
-                              <span className="text-xs font-semibold text-foreground">{v.odBy}</span>
+                              <span className="text-xs font-semibold text-foreground">{v.votedBy}</span>
                               {v.feedback && <p className="text-xs text-muted-foreground mt-0.5">{v.feedback}</p>}
                             </div>
                             <span className="text-[10px] text-muted-foreground">{v.timestamp.toLocaleDateString()}</span>
