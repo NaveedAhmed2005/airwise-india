@@ -27,27 +27,29 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/toll-gates" element={<TollGates />} />
-            <Route path="/carbon-credits" element={<CarbonCredits />} />
-            <Route path="/aqi-map" element={<AQIMap />} />
-            <Route path="/aqi-prediction" element={<AQIPrediction />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/suggestions" element={<Suggestions />} />
-            <Route path="/policies" element={<Policies />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/collector-hub" element={<CollectorHub />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Chatbot />
-        </BrowserRouter>
+        <HubProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/toll-gates" element={<TollGates />} />
+              <Route path="/carbon-credits" element={<CarbonCredits />} />
+              <Route path="/aqi-map" element={<AQIMap />} />
+              <Route path="/aqi-prediction" element={<AQIPrediction />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/suggestions" element={<Suggestions />} />
+              <Route path="/policies" element={<Policies />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/collector-hub" element={<CollectorHub />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Chatbot />
+          </BrowserRouter>
+        </HubProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
