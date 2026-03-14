@@ -310,7 +310,7 @@ export default function CollectorHub() {
               const isExpanded = expandedScheme === scheme.id;
               const approves = scheme.votes.filter((v) => v.vote === "approve").length;
               const rejects = scheme.votes.filter((v) => v.vote === "reject").length;
-              const hasVoted = scheme.votes.some((v) => v.odBy === user.name);
+              const hasVoted = scheme.votes.some((v) => v.votedBy === user.name);
 
               return (
                 <Card key={scheme.id} className={`transition-all ${scheme.status === "approved" ? "border-primary/30" : scheme.status === "rejected" ? "border-destructive/30" : ""}`}>
