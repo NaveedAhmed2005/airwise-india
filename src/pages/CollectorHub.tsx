@@ -20,9 +20,8 @@ type Tab = "chat" | "schemes" | "members";
 
 export default function CollectorHub() {
   const { user, approvedCollectorsList } = useAuth();
+  const { messages, setMessages, schemes, setSchemes } = useHub();
   const [activeTab, setActiveTab] = useState<Tab>("chat");
-  const [messages, setMessages] = useState<ChatMessage[]>(SEED_MESSAGES);
-  const [schemes, setSchemes] = useState<Scheme[]>(SEED_SCHEMES);
   const [chatInput, setChatInput] = useState("");
   const [showNewScheme, setShowNewScheme] = useState(false);
   const [expandedScheme, setExpandedScheme] = useState<string | null>(null);
