@@ -79,8 +79,8 @@ export default function CollectorHub() {
     setSchemes((prev) =>
       prev.map((s) => {
         if (s.id !== schemeId) return s;
-        if (s.votes.some((v) => v.odBy === user.name)) return s;
-        return { ...s, votes: [...s.votes, { odBy: user.name, vote: decision, feedback: voteFeedback, timestamp: new Date() }] };
+        if (s.votes.some((v) => v.votedBy === user.name)) return s;
+        return { ...s, votes: [...s.votes, { votedBy: user.name, vote: decision, feedback: voteFeedback, timestamp: new Date() }] };
       })
     );
     setVoteFeedback("");
